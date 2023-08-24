@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block start %}
+<br>
+
+<div class="w-25 p-3 alert alert-info" role="alert">
+   <h3> Hello 👋 {{request.user}}</h3>
+</div>
+
+
+<form class="container card  col-6 mx-auto p-3 shadow-lg " method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2> Add Your Recipe</h2>
+    <hr>
+    <div class=" mb-3">
+      <label  class="form-label">Recipe Name</label>
+      <input type="text" class="form-control" name="r_name">
+    </div>
+    <div class="mb-3">
+      <label  class="form-label">Recipe Description</label>
+      <textarea name="r_description"   class="form-control"  ></textarea>
+  
+    </div>
+    <div class="mb-3 ">
+      <label class="form-check-label" >Recipe Image</label>
+      <input type="file" class="form-control"  name="r_image">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <form method="get" >
+    <div class=" container mb-3">
+      <label  class="  form-label"><b>Search:</b></label>
+      <input type="text" name="search" class="container form-control" >
+      <button type="submit" class="btn btn-primary m-2">Search</button>
+    </div>
+  </form>
+
+  <br>
+  <table class="table container">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Recipe Name</th>
+        <th scope="col">Recipe Description</th>
+        <th scope="col">Recipe Image</th>
+        <th scope="col">Action</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      
+      {% for recipe in recipes %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{recipe.r_name}}</td>
+        <td>{{recipe.r_description}}</td>
+        <td> 
+          <img src="/media/{{recipe.r_image}}"  style="height: 100px ;"> </td>
+      
+        <td>
+          <a href="/update/{{recipe.id}}"><button type="button" class="btn btn-primary my-1">Update</button></a>
+          
+          <a href="/delete/{{recipe.id}}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock%}
