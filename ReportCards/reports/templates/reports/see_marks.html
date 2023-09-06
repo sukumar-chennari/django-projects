@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block start %}
+<br>
+
+
+
+<div class="container table w-25 ">
+    <table class="container shadow-lg table-bordered">
+      {% for student in students%}
+      <tr>
+        <td><h5>Studen ID</h5></td>
+        <td>{{student.student_id}}</td>
+       
+      </tr>
+      <tr>  
+        <td><h5>Studen Name </h5></td>
+        <td>{{student.student_name}}</td>
+      </tr>
+      
+      <tr>  
+        <td><h5>Rank</td>
+        <td>{{queryset.first.student.studentreportmarks.first.student_rank}}</td>
+      </tr>
+
+      <tr>  
+        <td> <h5>Total Marks </h5></td>
+        <td>{{total_marks.total_marks}}</td>
+      </tr>
+      
+      {% endfor %}
+      <h5>
+     
+  </table>
+</div>
+   
+    
+
+<table class=" container table table-striped table-light">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Marks</th>
+        
+    </thead>
+    <tbody>
+        {% for marks in queryset %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            
+           
+            <td>{{marks.subject.subject_name}}</td>
+            <td>{{marks.marks}}</td>
+            
+          </tr>
+        {% endfor %}
+      
+    </tbody>
+
+  </table>
+  
+
+{% endblock%}
