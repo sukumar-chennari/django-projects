@@ -1,1 +1,1 @@
-# django-recipes-project
+# django-project
